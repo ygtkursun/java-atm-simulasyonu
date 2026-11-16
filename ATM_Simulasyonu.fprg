@@ -1,0 +1,114 @@
+
+<?xml version="1.0"?>
+<flowgorithm fileversion="2.18">
+    <attributes>
+        <attribute name="name" value="ATM Simulasyonu"/>
+        <attribute name="authors" value=""/>
+        <attribute name="about" value="Java ATM Simulasyonu"/>
+        <attribute name="saved" value="2026-11-17"/>
+        <attribute name="created" value="20261117000000"/>
+        <attribute name="edited" value="20261117000000"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="bakiye" type="Real" array="False" size=""/>
+            <declare name="yatirilanToplam" type="Real" array="False" size=""/>
+            <declare name="cekilenToplam" type="Real" array="False" size=""/>
+            <declare name="islemSayisi" type="Integer" array="False" size=""/>
+            <declare name="secim" type="Integer" array="False" size=""/>
+            <declare name="yatirilan" type="Real" array="False" size=""/>
+            <declare name="cekilen" type="Real" array="False" size=""/>
+            <declare name="devam" type="Boolean" array="False" size=""/>
+
+            <assign variable="bakiye" expression="10000"/>
+            <assign variable="yatirilanToplam" expression="0"/>
+            <assign variable="cekilenToplam" expression="0"/>
+            <assign variable="islemSayisi" expression="0"/>
+            <assign variable="devam" expression="True"/>
+
+            <while expression="devam = True">
+
+                <output expression="&quot;1. Bakiye Goruntuleme&quot;" newline="True"/>
+                <output expression="&quot;2. Para Yatirma&quot;" newline="True"/>
+                <output expression="&quot;3. Para Cekme&quot;" newline="True"/>
+                <output expression="&quot;4. Cikis&quot;" newline="True"/>
+                <output expression="&quot;Seciminizi giriniz: &quot;" newline="False"/>
+                <input variable="secim"/>
+
+                <if expression="secim = 1">
+                    <then>
+                        <output expression="&quot;Guncel bakiyeniz: &quot; &amp; bakiye &amp; &quot; TL&quot;" newline="True"/>
+                        <assign variable="islemSayisi" expression="islemSayisi + 1"/>
+                    </then>
+                    <else>
+                        <if expression="secim = 2">
+                            <then>
+                                <output expression="&quot;Yatirmak istediginiz tutari giriniz: &quot;" newline="False"/>
+                                <input variable="yatirilan"/>
+
+                                <if expression="yatirilan &gt; 0">
+                                    <then>
+                                        <assign variable="bakiye" expression="bakiye + yatirilan"/>
+                                        <assign variable="yatirilanToplam" expression="yatirilanToplam + yatirilan"/>
+                                        <assign variable="islemSayisi" expression="islemSayisi + 1"/>
+                                        <output expression="&quot;Para yatirma islemi basarili.&quot;" newline="True"/>
+                                        <output expression="&quot;Yeni bakiyeniz: &quot; &amp; bakiye &amp; &quot; TL&quot;" newline="True"/>
+                                    </then>
+                                    <else>
+                                        <output expression="&quot;Hatali tutar! Pozitif bir deger giriniz.&quot;" newline="True"/>
+                                    </else>
+                                </if>
+                            </then>
+                            <else>
+                                <if expression="secim = 3">
+                                    <then>
+                                        <output expression="&quot;Cekmek istediginiz tutari giriniz: &quot;" newline="False"/>
+                                        <input variable="cekilen"/>
+
+                                        <if expression="cekilen &lt;= 0">
+                                            <then>
+                                                <output expression="&quot;Hatali tutar! Pozitif bir deger giriniz.&quot;" newline="True"/>
+                                            </then>
+                                            <else>
+                                                <if expression="cekilen &gt; bakiye">
+                                                    <then>
+                                                        <output expression="&quot;Yetersiz bakiye!&quot;" newline="True"/>
+                                                    </then>
+                                                    <else>
+                                                        <assign variable="bakiye" expression="bakiye - cekilen"/>
+                                                        <assign variable="cekilenToplam" expression="cekilenToplam + cekilen"/>
+                                                        <assign variable="islemSayisi" expression="islemSayisi + 1"/>
+                                                        <output expression="&quot;Para cekme islemi basarili.&quot;" newline="True"/>
+                                                        <output expression="&quot;Yeni bakiyeniz: &quot; &amp; bakiye &amp; &quot; TL&quot;" newline="True"/>
+                                                    </else>
+                                                </if>
+                                            </else>
+                                        </if>
+                                    </then>
+                                    <else>
+                                        <if expression="secim = 4">
+                                            <then>
+                                                <output expression="&quot;Son bakiyeniz: &quot; &amp; bakiye &amp; &quot; TL&quot;" newline="True"/>
+                                                <output expression="&quot;Toplam islem sayisi: &quot; &amp; islemSayisi" newline="True"/>
+                                                <output expression="&quot;Toplam yatirilan tutar: &quot; &amp; yatirilanToplam &amp; &quot; TL&quot;" newline="True"/>
+                                                <output expression="&quot;Toplam cekilen tutar: &quot; &amp; cekilenToplam &amp; &quot; TL&quot;" newline="True"/>
+                                                <output expression="&quot;ATM sisteminden cikis yapiliyor.&quot;" newline="True"/>
+
+                                                <assign variable="devam" expression="False"/>
+                                            </then>
+                                            <else>
+                                                <output expression="&quot;Gecersiz secim! Lutfen 1-4 arasinda bir deger giriniz.&quot;" newline="True"/>
+                                            </else>
+                                        </if>
+                                    </else>
+                                </if>
+                            </else>
+                        </if>
+                    </else>
+                </if>
+
+            </while>
+        </body>
+    </function>
+</flowgorithm>
